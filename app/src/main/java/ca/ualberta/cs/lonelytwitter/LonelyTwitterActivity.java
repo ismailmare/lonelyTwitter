@@ -9,6 +9,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Date;
 
+import android.content.Intent;
+import android.view.View.OnClickListener;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
@@ -23,7 +25,8 @@ public class LonelyTwitterActivity extends Activity {
 	private static final String FILENAME = "file.sav";
 	private EditText bodyText;
 	private ListView oldTweetsList;
-	
+    private String mood;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +35,7 @@ public class LonelyTwitterActivity extends Activity {
 
 		bodyText = (EditText) findViewById(R.id.body);
 		Button saveButton = (Button) findViewById(R.id.save);
+		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
 		saveButton.setOnClickListener(new View.OnClickListener() {
@@ -40,10 +44,35 @@ public class LonelyTwitterActivity extends Activity {
 				setResult(RESULT_OK);
 				String text = bodyText.getText().toString();
 				saveInFile(text, new Date(System.currentTimeMillis()));
-				finish();
+
+				done();
+
 
 			}
 		});
+
+		clearButton.setOnClickListener(new OnClickListener() {
+
+			//@Override
+			public void onClick(View v) {
+				bodyText = (EditText) findViewById(R.id.body);
+				bodyText.getText().clear();
+			}
+
+		});
+
+
+	}
+
+	public void done(){
+		Intent intent = new Intent(this, LonelyTwitterActivity.class);
+		startActivity(intent);
+	}
+
+
+	@Override
+	public void onBackPressed() {
+
 	}
 
 	@Override
@@ -76,7 +105,7 @@ public class LonelyTwitterActivity extends Activity {
 		}
 		return tweets.toArray(new String[tweets.size()]);
 	}
-	
+
 	private void saveInFile(String text, Date date) {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
@@ -92,4 +121,5 @@ public class LonelyTwitterActivity extends Activity {
 			e.printStackTrace();
 		}
 	}
+
 }
