@@ -43,7 +43,7 @@ public class TweetList{
     /**
      * getting a certain tweet depending on list index
      * @param tweet
-     * @return
+     * @return Tweets object
      */
     public Tweets getTweet(int tweet){
         return tweetsList.get(tweet);
