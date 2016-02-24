@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-
 android {
     compileSdkVersion 18
     buildToolsVersion "22.0.1"
@@ -21,3 +20,16 @@ android {
         }
     }
 }
+
+<<<<<<< HEAD
+repositories {mavenCentral()}
+
+dependencies {
+    compile 'com.google.code.gson:gson:2.5'
+}
+=======
+dependencies {
+    compile 'com.google.code.gson:gson:2.5'
+    compile 'com.android.support:appcompat-v7:18.0.0'
+}
+>>>>>>> e00b4c29219849a4e1f5516cbfca1e83537b784b
